@@ -199,7 +199,7 @@
 		music1.inputEnabled = true;
 		music1.visible = false;
 		
-		menu1.events.onInputUp.add(checkBtn);
+		menu1.events.onInputUp.add(checkBtns);
 	}
 
 	function update() 
@@ -300,7 +300,7 @@
 
 	}
 
-	function checkBtn()
+	function checkBtns()
 	{
 		//if(game.paused == true) {play.visible=true; pausebtn.visible = false;}
 		//else {pausebtn.visible=true; play.visible= false;}
@@ -326,7 +326,7 @@
 		play.events.onInputUp.add(function()
 		{ 
 			this.game.physics.arcade.isPaused=false;
-			player.body.enable = false;
+			player.body.enable = true;
 			game.sound.mute=false;
 			//game.paused = false; 
 			pausebtn.visible = true; 	
