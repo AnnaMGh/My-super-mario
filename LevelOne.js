@@ -13,7 +13,6 @@
 		//  Remove the next 2 lines if running locally
 		this.load.baseURL = 'https://annamgh.github.io/My-super-mario/';
 		this.load.crossOrigin = 'anonymous';
-		//window.alert('In preload!');
 		this.load.spritesheet('background_02', 'assets/background_02.png', 32,32);
 		this.load.spritesheet('coin', 'assets/coins_32px.png', 32,32);
 		this.load.spritesheet('star', 'assets/star_32px.png', 32,32);
@@ -46,7 +45,6 @@
 	var bonus =0;
 	var life = 1;
 	var checkLife = true;
-	var anime = false;
 	var endAnim = false;
 
 	function create() 
@@ -128,7 +126,7 @@
 		rmushrooms.setAll('body.gravity.y', 500);
 
 		//add player
-		player = game.add.sprite(0, 250, 'mario');
+		player = game.add.sprite(30, 250, 'mario');
 		game.physics.arcade.enable(player);
 		player.body.gravity.y = 350;
 		player.body.collideWorldBounds = true;
@@ -145,11 +143,25 @@
 		cursors = game.input.keyboard.createCursorKeys();
 
 		map.createLayer('ground');
+		
 
+		
 		//add score text
-		scoreText = game.add.text(16, 16, 'Score: ' + score  +'		Bonus: '+ bonus +'		Life: ' + life, { font: "32px Arial", fill: "#ffffff", align: "center" });
+		scoreText = game.add.text(16, 20, '				:						' + score  
+		+'				\nbonus:	' + bonus 
+		+'					\n:						' + life, { font: "26px Arial", fill: "#ffffff", align: "center" });
 		scoreText.fixedToCamera = true;
 		scoreText.cameraOffset.setTo(16, 16);
+		
+		
+				//add score image
+		cn = game.add.sprite(16,16,'coin');
+		mf = game.add.sprite(16,64,'mario_life');
+		cn.fixedToCamera = true;
+		cn.cameraOffset.setTo(16, 16);
+		mf.fixedToCamera = true;
+		mf.cameraOffset.setTo(16, 85);
+
 
 		//add menu
 		menu1 = game.add.sprite(1300,5, 'menu');
@@ -197,7 +209,7 @@
 		game.physics.arcade.collide(rmushrooms, layer);
 		game.physics.arcade.collide(gmushrooms, layer);
 		checkPipes();
-		checkFinish();
+		checkFinish3();
 		
 		if(checkLife == true)
 		{
@@ -307,17 +319,22 @@
 		music1.visible=false; music2.visible=false; menu2.visible=false; menu1.visible = true;});
 	}
 	
-	function checkFinish()
+	function checkFinish3()
 	{
-		if(player.x<6048 && player.x>5920 && player.y<224 && player.y>128)
+		if(player.x<6045 && player.x>5856 && player.y<224 && player.y>128 && endAnim==false)
 		{
-			//player.reset(0,0);
-			//player.velocity.y = 50;
+			
+			var finalText = game.add.text(500,100,'LEVEL ONE COMPLETE', {fill:"#FFF"});
+			finalText.fixedToCamera = true;
+			finalText.cameraOffset.setTo(500,100);
 			player.animations.play('whenWin');
 			music.stop();
-			if(endAnim==false)win_sound.play();
-			endAnim = true;
-			game.time.events.add(Phaser.Timer.SECOND * 5, function() {game.paused = true;});
+			endAnim=true;
+			win_sound.play();
+			game.time.events.add(Phaser.Timer.SECOND * 5, function()
+			{
+				game.state.start('LevelTwo'); 
+			});
 			player.body.velocity.x=0;
 		}
 	}
@@ -343,14 +360,18 @@
 	function coinOverlap(player, coin) {
 		coins_sound.play();
 		score += 1;
-		scoreText.text = 'Score: ' + score + '		Bonus: '+ bonus +'		Life: ' + life;
+		scoreText.text ='				:						' + score  
+			+'				\nbonus:	' + bonus 
+			+'					\n:						' + life;
 		coin.kill();
 	}
 	
 	function starOverlap(player, star) {
 		life_sound.play();
 		bonus += 1;
-		scoreText.text = 'Score: ' + score + '		Bonus: '+ bonus +'		Life: ' + life;
+scoreText.text ='				:						' + score  
+			+'				\nbonus:	' + bonus 
+			+'					\n:						' + life;
 		star.kill();
 	}
 
@@ -358,7 +379,9 @@
 	{
 		life_sound.play();
 		life++;
-		scoreText.text = 'Score: ' + score + '		Bonus: '+ bonus +'		Life: ' + life;
+		scoreText.text ='				:						' + score  
+			+'				\nbonus:	' + bonus 
+			+'					\n:						' + life;
 		mlife.kill();
 	}
 
@@ -371,7 +394,9 @@
 			mushroom.body.enable = false;
 			player.body.velocity.y = -80;
 			bonus += 2;
-			scoreText.text = 'Score: ' + score + '		Bonus: '+ bonus +'		Life: ' + life;
+			scoreText.text ='				:						' + score  
+			+'				\nbonus:	' + bonus 
+			+'					\n:						' + life;
 			game.time.events.add(Phaser.Timer.SECOND, function() {
 				mushroom.kill();
 			});
@@ -379,7 +404,9 @@
 		else if(player.body.touching.down==false && life>0)
 		{
 				life--;
-				scoreText.text = 'Score: ' + score + '		Bonus: '+ bonus +'		Life: ' + life;
+			scoreText.text ='				:						' + score  
+			+'				\nbonus:	' + bonus 
+			+'					\n:						' + life;
 				checkLife = false;
 				
 				game.time.events.add(Phaser.Timer.SECOND * 3, function() {checkLife=true;});
@@ -387,14 +414,23 @@
 		else if(player.body.touching.down==false && life==0)
 		{
 				checkLife==false;
-				scoreText.text = 'Score: ' + score + '		Bonus: '+ bonus +'		Life: ' + life + '\n\tYOU DIED!';
+				scoreText.text ='				:						' + score  
+			+'				\nbonus:	' + bonus 
+			+'					\n:						' + life;
 				life--;
 				music.stop();
 				player.frame = 7;
 				player.body.enable = false;
 				player.animations.stop();
 				die_sound.play();
-				game.time.events.add(Phaser.Timer.SECOND * 3, function() {game.paused = true; });
+				game.time.events.add(Phaser.Timer.SECOND * 3, function() 
+				{
+					checkLife = true; endAnim = false;
+					life=0; bonus=0; score=0;
+					this.game.state.restart(false,true);
+					//game.paused = true; 
+					
+				});
 		}
 		
 	}
