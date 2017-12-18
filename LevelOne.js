@@ -318,14 +318,16 @@
 		{
 			this.game.physics.arcade.isPaused=true;
 			player.body.enable = false;
+			game.sound.mute=true;
 			//game.paused = true; 
 			pausebtn.visible = false; 
 			play.visible = true;
 		});
 		play.events.onInputUp.add(function()
 		{ 
-			this.game.physics.arcade.isPaused=true;
-			player.body.enable = true;
+			this.game.physics.arcade.isPaused=false;
+			player.body.enable = false;
+			game.sound.mute=false;
 			//game.paused = false; 
 			pausebtn.visible = true; 	
 			play.visible = false;
