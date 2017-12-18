@@ -316,7 +316,7 @@
 		
 		pausebtn.events.onInputUp.add(function()
 		{
-			window.alert("cedva");
+			this.game.physics.arcade.isPaused=true;
 			player.body.enable = false;
 			//game.paused = true; 
 			pausebtn.visible = false; 
@@ -324,7 +324,7 @@
 		});
 		play.events.onInputUp.add(function()
 		{ 
-			window.alert("cedv2a");
+			this.game.physics.arcade.isPaused=true;
 			player.body.enable = true;
 			//game.paused = false; 
 			pausebtn.visible = true; 	
