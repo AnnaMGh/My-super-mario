@@ -302,7 +302,10 @@
 
 	function checkbuttons()
 	{
-		if(game.paused == true) {play.visible=true; pausebtn.visible = false;}
+		//if(game.paused == true) {play.visible=true; pausebtn.visible = false;}
+		//else {pausebtn.visible=true; play.visible= false;}
+		
+		if(player.body.enable== false){play.visible=true; pausebtn.visible = false;}
 		else {pausebtn.visible=true; play.visible= false;}
 		
 		if(game.sound.mute == true) {music1.visible=true; music2.visible = false;}
@@ -313,6 +316,7 @@
 		
 		pausebtn.events.onInputUp.add(function()
 		{
+			window.alert("cedva");
 			player.body.enable = false;
 			//game.paused = true; 
 			pausebtn.visible = false; 
@@ -320,6 +324,7 @@
 		});
 		play.events.onInputUp.add(function()
 		{ 
+			window.alert("cedv2a");
 			player.body.enable = true;
 			//game.paused = false; 
 			pausebtn.visible = true; 	
