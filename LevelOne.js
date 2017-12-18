@@ -311,8 +311,20 @@
 		menu1.visible = false;
 		menu2.visible = true;
 		
-		pausebtn.events.onInputUp.add(function(){game.paused = true; pausebtn.visible = false; play.visible = true;});
-		play.events.onInputUp.add(function(){ game.paused = false; pausebtn.visible = true; 	play.visible = false;});
+		pausebtn.events.onInputUp.add(function()
+		{
+			player.body.enable = false;
+			//game.paused = true; 
+			pausebtn.visible = false; 
+			play.visible = true;
+		});
+		play.events.onInputUp.add(function()
+		{ 
+			player.body.enable = true;
+			//game.paused = false; 
+			pausebtn.visible = true; 	
+			play.visible = false;
+		});
 		music1.events.onInputUp.add(function(){ game.sound.mute = false; music2.visible = true; music1.visible=false;});
 		music2.events.onInputUp.add(function(){ game.sound.mute = true; music1.visible = true; music2.visible=false;});
 		menu2.events.onInputUp.add(function(){ pausebtn.visible=false; play.visible = false; 
