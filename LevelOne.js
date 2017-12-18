@@ -199,7 +199,7 @@
 		music1.inputEnabled = true;
 		music1.visible = false;
 		
-		menu1.events.onInputUp.add(checkButton);
+		menu1.events.onInputUp.add(checkBtn);
 	}
 
 	function update() 
@@ -300,7 +300,7 @@
 
 	}
 
-	function checkButton()
+	function checkBtn()
 	{
 		//if(game.paused == true) {play.visible=true; pausebtn.visible = false;}
 		//else {pausebtn.visible=true; play.visible= false;}
