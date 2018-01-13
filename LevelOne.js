@@ -234,7 +234,7 @@
 				}
 				else
 				{	
-					player.body.velocity.x = -130;
+					player.body.velocity.x = -200;
 					player.animations.play('walkLeft');
 					player.goesRight = false;
 				}
@@ -249,7 +249,7 @@
 				}
 				else
 				{
-					player.body.velocity.x = 130;
+					player.body.velocity.x = 200;
 					player.animations.play('walkRight');
 					player.goesRight = true;
 				}
