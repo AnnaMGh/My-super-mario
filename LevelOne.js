@@ -111,7 +111,7 @@
 		gmushrooms.callAll('animations.add', 'animations', 'walk', [0,1], 2, true);
 		gmushrooms.callAll('animations.play', 'animations', 'walk');
 		gmushrooms.setAll('body.bounce.x', 1);
-		gmushrooms.setAll('body.velocity.x', -35);
+		gmushrooms.setAll('body.velocity.x', -60);
 		gmushrooms.setAll('body.gravity.y', 500);
 
 		//add red mushrooms
@@ -122,7 +122,7 @@
 			2, true);
 		rmushrooms.callAll('animations.play', 'animations', 'walk');
 		rmushrooms.setAll('body.bounce.x', 1);
-		rmushrooms.setAll('body.velocity.x', -25);
+		rmushrooms.setAll('body.velocity.x', -45);
 		rmushrooms.setAll('body.gravity.y', 500);
 
 		//add player
